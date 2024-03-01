@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meylin_avel/game_page.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -35,8 +36,15 @@ class StartPage extends StatelessWidget {
           // Spielen-Button
           Align(
             alignment: Alignment(
-                0, 0.5), // Zentriert horizontal, unten im unteren Viertel
+                0, 0.3), // Zentriert horizontal, etwas höher positioniert
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 50, vertical: 20), // Größere Schaltfläche
+                side: BorderSide(
+                    color: const Color.fromARGB(255, 4, 49, 87),
+                    width: 2), // Blaue Umrandung
+              ),
               child: Text('Spielen'),
               onPressed: () {
                 Navigator.push(
@@ -46,6 +54,86 @@ class StartPage extends StatelessWidget {
               },
             ),
           ),
+// Fragezeichen und Ausrufezeichen Buttons
+          Align(
+            alignment: Alignment(
+                0, 0.7), // Zentriert horizontal, etwas unter dem Spielen-Button
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  child: Text('?'),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Spielanleitung'),
+                          content: Text(
+                              '''Herzlich willkommen, kleiner Freund! Lass uns gemeinsam ein spannendes Spiel spielen. Jedes Mal, wenn der Redner ‘Jehova’ oder ‘Jesus’ sagt, klickst du auf einen der beiden Buttons. Bei ‘Jehova’ klickst du auf den linken Button und bei ‘Jesus’ auf den rechten. Du wirst sehen, wie die Zahlen auf dem Bildschirm steigen! Wenn du das Spiel neu starten möchtest, kannst du den Counter jederzeit auf null zurücksetzen. Viel Spaß beim Zuhören und Spielen!
+
+An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden dabei zu helfen, aufmerksamer zuzuhören. Es ist eine spielerische Methode, die Konzentration zu fördern. Wir vertrauen darauf, dass Ihr dieses Spiel verantwortungsvoll nutzen und es als hilfreiches Werkzeug zur Förderung des aktiven Zuhörens einsetzen werdet.'''),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+
+                SizedBox(
+                    width:
+                        30), // Fügt einen horizontalen Abstand zwischen den Buttons hinzu
+                ElevatedButton(
+                  child: Text('!'),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) {
+                        return SingleChildScrollView(
+                          child: AlertDialog(
+                            title: Text(
+                                'Spielinformationen und Datenschutzhinweise'),
+                            content: Text('''
+Meylin & Avel's Counter Game
+Entwickelt von: Kerim Yitmez
+Version: 1.0.0
+
+Wir respektieren deine Privatsphäre. Dieses Spiel sammelt oder verarbeitet keinerlei persönliche Daten. 
+
+Die Grafiken in diesem Spiel wurden mit Hilfe von ChatGPT erstellt. 
+
+Dieses Spiel und seine Inhalte unterliegen dem Urheberrecht. Jegliche Vervielfältigung oder Verbreitung ohne vorherige schriftliche Zustimmung ist untersagt.
+
+Bei Fragen oder Anregungen kannst du uns gerne eine E-Mail an yitmez@gmx.de schreiben. Wir freuen uns auf euer Feedback und eure Vorschläge zur Verbesserung des Spiels.
+
+Vielen Dank fürs Spielen!
+
+'''),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
