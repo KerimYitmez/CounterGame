@@ -17,15 +17,15 @@ class StartPage extends StatelessWidget {
     String infoText =
         '''Herzlich willkommen, kleiner Freund! Lass uns gemeinsam ein spannendes Spiel spielen. Jedes Mal, wenn der Redner ‘Jehova’ oder ‘Jesus’ sagt, klickst du auf einen der beiden Buttons. Bei ‘Jehova’ klickst du auf den linken Button und bei ‘Jesus’ auf den rechten. Du wirst sehen, wie die Zahlen auf dem Bildschirm steigen! Wenn du das Spiel neu starten möchtest, kannst du den Counter jederzeit auf null zurücksetzen. Viel Spaß beim Zuhören und Spielen!
 
-An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden dabei zu helfen, aufmerksamer zuzuhören. Es ist eine spielerische Methode, die Konzentration zu fördern. Wir vertrauen darauf, dass Ihr dieses Spiel verantwortungsvoll nutzen und es als hilfreiches Werkzeug zur Förderung des aktiven Zuhörens einsetzen werdet.''';
+An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden dabei zu helfen, aufmerksamer zuzuhören. Es ist eine spielerische Methode, die Konzentration zu fördern. Wir vertrauen darauf, dass Ihr dieses Spiel verantwortungsvoll nutzen und es als hilfreiches Werkzeug zur Förderung des aktiven Zuhörens einsetzen werdet.
+
+Mit freundlichen Grüßen, Euer Entwicklerteam 🌟🎮''';
 
     String privacyText = '''
 Meylin & Avel's Counter Game
 Version: 1.0.0
 
 Wir respektieren deine Privatsphäre. Dieses Spiel sammelt oder verarbeitet keinerlei persönliche Daten. 
-
-Die Grafiken in diesem Spiel wurden mit Hilfe von ChatGPT erstellt. 
 
 Dieses Spiel und seine Inhalte unterliegen dem Urheberrecht. Jegliche Vervielfältigung oder Verbreitung ohne vorherige schriftliche Zustimmung ist untersagt.
 
@@ -128,8 +128,7 @@ Vielen Dank fürs Spielen!
                       builder: (BuildContext context) {
                         return SingleChildScrollView(
                           child: AlertDialog(
-                            title: Text(
-                                'Spielinformationen und Datenschutzhinweise'),
+                            title: Text('Spielinformationen und Datenschutz'),
                             content: Text(privacyText),
                             actions: <Widget>[
                               TextButton(
