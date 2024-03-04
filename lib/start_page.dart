@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:flutter/material.dart';
 import 'package:meylin_avel/game_page.dart';
 import 'package:showcaseview/showcaseview.dart';
@@ -10,6 +13,26 @@ class StartPage extends StatelessWidget {
     String backgroundImage = useMobileLayout
         ? 'lib/assets/images/background_startpage_smartphone.jpeg'
         : 'lib/assets/images/background_startpage_tablet.jpeg';
+
+    String infoText =
+        '''Herzlich willkommen, kleiner Freund! Lass uns gemeinsam ein spannendes Spiel spielen. Jedes Mal, wenn der Redner ‘Jehova’ oder ‘Jesus’ sagt, klickst du auf einen der beiden Buttons. Bei ‘Jehova’ klickst du auf den linken Button und bei ‘Jesus’ auf den rechten. Du wirst sehen, wie die Zahlen auf dem Bildschirm steigen! Wenn du das Spiel neu starten möchtest, kannst du den Counter jederzeit auf null zurücksetzen. Viel Spaß beim Zuhören und Spielen!
+
+An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden dabei zu helfen, aufmerksamer zuzuhören. Es ist eine spielerische Methode, die Konzentration zu fördern. Wir vertrauen darauf, dass Ihr dieses Spiel verantwortungsvoll nutzen und es als hilfreiches Werkzeug zur Förderung des aktiven Zuhörens einsetzen werdet.''';
+
+    String privacyText = '''
+Meylin & Avel's Counter Game
+Version: 1.0.0
+
+Wir respektieren deine Privatsphäre. Dieses Spiel sammelt oder verarbeitet keinerlei persönliche Daten. 
+
+Die Grafiken in diesem Spiel wurden mit Hilfe von ChatGPT erstellt. 
+
+Dieses Spiel und seine Inhalte unterliegen dem Urheberrecht. Jegliche Vervielfältigung oder Verbreitung ohne vorherige schriftliche Zustimmung ist untersagt.
+
+Bei Fragen oder Anregungen kannst du uns gerne eine E-Mail an yitmez@gmx.de schreiben. Wir freuen uns auf euer Feedback und eure Vorschläge zur Verbesserung des Spiels.
+
+Vielen Dank fürs Spielen!
+ ''';
 
     return Scaffold(
       /*
@@ -34,9 +57,11 @@ class StartPage extends StatelessWidget {
                 Image.asset('lib/assets/images/logo_counter_game_100x103.png'),
           ),
           // Spielen-Button
+          /*
           Align(
             alignment: Alignment(
                 0, 0.3), // Zentriert horizontal, etwas höher positioniert
+         
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(
@@ -46,6 +71,10 @@ class StartPage extends StatelessWidget {
                     width: 2), // Blaue Umrandung
               ),
               child: Text('Spielen'),
+              */
+          Align(
+            alignment: Alignment(0, 0.3),
+            child: ShakingButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -62,25 +91,25 @@ class StartPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
-                  child: Text('?'),
+                  child: Icon(Icons.question_mark),
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Spielanleitung'),
-                          content: Text(
-                              '''Herzlich willkommen, kleiner Freund! Lass uns gemeinsam ein spannendes Spiel spielen. Jedes Mal, wenn der Redner ‘Jehova’ oder ‘Jesus’ sagt, klickst du auf einen der beiden Buttons. Bei ‘Jehova’ klickst du auf den linken Button und bei ‘Jesus’ auf den rechten. Du wirst sehen, wie die Zahlen auf dem Bildschirm steigen! Wenn du das Spiel neu starten möchtest, kannst du den Counter jederzeit auf null zurücksetzen. Viel Spaß beim Zuhören und Spielen!
-
-An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden dabei zu helfen, aufmerksamer zuzuhören. Es ist eine spielerische Methode, die Konzentration zu fördern. Wir vertrauen darauf, dass Ihr dieses Spiel verantwortungsvoll nutzen und es als hilfreiches Werkzeug zur Förderung des aktiven Zuhörens einsetzen werdet.'''),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text('OK'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
+                        return SingleChildScrollView(
+                          child: AlertDialog(
+                            title: Text('Spielanleitung'),
+                            content: Text(infoText),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     );
@@ -91,7 +120,7 @@ An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden
                     width:
                         30), // Fügt einen horizontalen Abstand zwischen den Buttons hinzu
                 ElevatedButton(
-                  child: Text('!'),
+                  child: Icon(Icons.info),
                   onPressed: () {
                     showModalBottomSheet(
                       context: context,
@@ -101,22 +130,7 @@ An die lieben Eltern: Dieses Spiel wurde entwickelt, um unseren kleinen Freunden
                           child: AlertDialog(
                             title: Text(
                                 'Spielinformationen und Datenschutzhinweise'),
-                            content: Text('''
-Meylin & Avel's Counter Game
-Entwickelt von: Kerim Yitmez
-Version: 1.0.0
-
-Wir respektieren deine Privatsphäre. Dieses Spiel sammelt oder verarbeitet keinerlei persönliche Daten. 
-
-Die Grafiken in diesem Spiel wurden mit Hilfe von ChatGPT erstellt. 
-
-Dieses Spiel und seine Inhalte unterliegen dem Urheberrecht. Jegliche Vervielfältigung oder Verbreitung ohne vorherige schriftliche Zustimmung ist untersagt.
-
-Bei Fragen oder Anregungen kannst du uns gerne eine E-Mail an yitmez@gmx.de schreiben. Wir freuen uns auf euer Feedback und eure Vorschläge zur Verbesserung des Spiels.
-
-Vielen Dank fürs Spielen!
-
-'''),
+                            content: Text(privacyText),
                             actions: <Widget>[
                               TextButton(
                                 child: Text('OK'),
@@ -140,6 +154,53 @@ Vielen Dank fürs Spielen!
   }
 }
 
+// -------- ShakingButton -------- start
+class ShakingButton extends StatefulWidget {
+  final VoidCallback onPressed;
+
+  const ShakingButton({Key? key, required this.onPressed}) : super(key: key);
+
+  @override
+  _ShakingButtonState createState() => _ShakingButtonState();
+}
+
+class _ShakingButtonState extends State<ShakingButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    )..repeat(reverse: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: Tween(begin: 0.95, end: 1.05).animate(_controller),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          side:
+              BorderSide(color: const Color.fromARGB(255, 4, 49, 87), width: 2),
+        ),
+        child: Icon(Icons.play_arrow),
+        onPressed: widget.onPressed,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+// ------ShakingButton------------Stop----------
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -157,6 +218,40 @@ class _SplashScreenState extends State<SplashScreen> {
     throw UnimplementedError();
   }
 }
+
+// --------EmailLink ---------------------Start-----
+class EmailLink extends StatelessWidget {
+  final String email;
+
+  const EmailLink({Key? key, required this.email}) : super(key: key);
+
+  Future<void> _launchEmail() async {
+    final url = 'mailto:$email';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _launchEmail,
+      child: Text(
+        email,
+        style: TextStyle(
+          decoration: TextDecoration.underline,
+          color: Colors.blue,
+        ),
+      ),
+    );
+  }
+}
+
+// --------EmailLink ---------------------End-----
+
+
 /*
 class _SplashScreenState {
    @override

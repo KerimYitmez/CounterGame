@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     _counter++;
+
     if (_counter % 10 == 0) {
       showSpecialGraphic = true;
       _checkVibrator();
@@ -198,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: _resetCounter,
-                  child: Text('0'),
+                  child: Icon(Icons.restart_alt),
                 ),
               ],
             ),
@@ -335,7 +336,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: _resetCounter,
-                  child: Text('0'),
+                  child: Icon(Icons.restart_alt),
                 ),
               ],
             ),
@@ -455,7 +456,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: _resetCounter,
-                  child: Text('0'),
+                  child: Icon(Icons.restart_alt),
                 ),
               ],
             ),
@@ -592,7 +593,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(height: 50),
                 ElevatedButton(
                   onPressed: _resetCounter,
-                  child: Text('0'),
+                  child: Icon(Icons.restart_alt),
                 ),
               ],
             ),
